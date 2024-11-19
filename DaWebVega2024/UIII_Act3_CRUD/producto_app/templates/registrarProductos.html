@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+<div class="row"><!--la fila-->
+<div class="col-sm-12 col-md-4 col-lg-4 xl-4"> <!--La Tarjeta-->
+<h1>mama</h1>
+<div class="card">
+    <div class="card-body">
+    <form action="registrarProducto/" method="POST"> {% csrf_token %} <!--falta action-->
+        <div class="form-group">
+        <input type="text" id="txtnombre" name="txtnombre" 
+        placeholder="Nombre Producto" minlenght="1" maxlenght="6" required>
+    </div>
+    <div class="form-group py-3">
+    <input type="text" id="txtid" name="txtid" 
+    placeholder="idproducto"  maxlenght="100" required>
+</div>
+<div class="form-group py-3">
+    <button type="submit" class="btn btn-secondary">Guardar Producto</button>
+</div>
+    </form>
+    </div>
+</div>
+<d/div><!--La Tarjeta-->
+</div><!--la fila-->
+<div class="col-sm-12 col-md-8 col-lg-8 xl-8"><!--columna derecha-->
+    <h1>LISTADO DE Producto</h1>
+    <!-- la tabla -->
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">id</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for m in misproductos %}
+            <tr> 
+                <td>{{forloop.counter}}</td>
+            <td> {{m.nombre}} </td>
+            <td> {{m.idproducto}} </td>
+            </tr>
+
+            
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- la tabla -->
+</div><!--columna derecha-->
+</div><!--la fila-->
+{% endblock %}
