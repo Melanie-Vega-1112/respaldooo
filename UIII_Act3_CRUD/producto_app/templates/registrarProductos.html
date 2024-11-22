@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+<div class="row"><!--la fila-->
+
+    <!-- La Tarjeta -->
+    <div class="col-sm-12 col-md-4 col-lg-4 xl-4">
+        <h1>Registro De Productos</h1>
+        <div class="card">
+            <div class="card-body">
+                <form action="{% url 'registrarProducto' %}" method="POST"> 
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtnombre" name="txtnombre" 
+                        placeholder="Nombre Producto" minlength="1" maxlength="100" required>
+                    </div>
+                    <div class="form-group py-2">
+                        <input type="text" id="txtid" name="txtid" 
+                        placeholder="idproducto" maxlength="100" required>
+                    </div>
+                    <div class="form-group py-2">
+                        <input type="text" id="txtdesc" name="txtdesc" 
+                        placeholder="Descripcion" maxlength="255" required>
+                    </div>
+                    <div class="form-group py-2">
+                        <input type="text" id="txtprecio" name="txtprecio" 
+                            placeholder="Precio" maxlength="100" required>
+                    </div>
+                    <div class="form-group py-2">
+                        <input type="text" id="txtcat" name="txtcat" 
+                    placeholder="Categoria" maxlength="100" required>
+                    </div>
+                    <div class="form-group py-2">
+                        <input type="text" id="txtmat" name="txtmat" 
+                        placeholder="Material" maxlength="100" required>
+                    </div>
+                    <div class="form-group py-2">
+                        <input type="text" id="txtstock" name="txtstock" 
+                        placeholder="Stock" maxlength="100" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <button type="submit" class="btn btn-secondary">Guardar Producto</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div><!--La Tarjeta-->
+
+    <!-- Columna Derecha -->
+    <div class="col-sm-12 col-md-8 col-lg-8 xl-8">
+        <h1>LISTADO DE Productos</h1>
+
+        <!-- La Tabla -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Nombre Del Producto</th>
+                    <th scope="col">Id Producto</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col">Material</th>
+                    <th scope="col">Stock</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for m in misproductos %}
+                    <tr>
+                        <td>{{ m.nombre }}</td>
+                        <td>{{ m.Descripcion }}</td>
+                        <td>{{ m.Precio }}</td>
+                        <td>{{ m.Categoria }}</td>
+                        <td>{{ m.Material }}</td>
+                        <td>{{ m.stock }}</td>
+                        <!-- Botón de eliminar -->
+                        <td>
+                            <form action="{% url 'eliminarProducto' m.idproducto %}" method="POST">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <!-- La Tabla -->
+    </div><!-- Columna Derecha -->
+
+</div><!-- La Fila -->
+{% endblock %}
