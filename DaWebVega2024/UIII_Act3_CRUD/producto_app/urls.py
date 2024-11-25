@@ -3,5 +3,6 @@ from producto_app import views
 
 urlpatterns = [
     path("", views.inicio_vista,name="inicio_vista"),
-    path("registrarProducto/" ,views.registrarProducto,name="registrarProducto")
+    path("registrarProducto/" ,views.registrarProducto,name="registrarProducto"),
+    path('eliminarProducto/<int:idproducto>/', views.eliminarProducto, name='eliminarProducto'),
 ]
